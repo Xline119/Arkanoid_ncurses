@@ -6,18 +6,14 @@
       "displayName": "Debug",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build/debug",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
     },
     {
       "name": "release",
       "displayName": "Release",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build/release",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
     }
   ],
   "buildPresets": [
@@ -29,5 +25,11 @@
       "name": "build-release",
       "configurePreset": "release"
     }
-  ]
+  ],
+  "testPresets": [
+    { 
+      "name": "run-tests",
+      "configurePreset": "debug"
+    }
+]
 }
