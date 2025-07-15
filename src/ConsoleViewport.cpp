@@ -8,6 +8,7 @@ ConsoleViewport::ConsoleViewport(int marginY, int marginX) : rows_(0), cols_(0),
     noecho();
     cbreak();
     keypad(stdscr, true);
+    detectWindowSize();
 }
 
 ConsoleViewport::~ConsoleViewport() {
@@ -30,7 +31,7 @@ void ConsoleViewport::render(const GameField& field) {
     int w = field.width();
     box(stdscr, 0, 0);
     for (int y = 0; y < h; ++y) {
-        wmove(stdscr, y + 2, w + 5);
+        wmove(stdscr, y + 2, w + 6);
         waddchnstr(stdscr, field.rowData(y), w);
     }
     refresh();

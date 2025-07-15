@@ -15,6 +15,7 @@ add_executable(arkanoid
     src/main.cpp
     src/GameField.cpp
     src/ConsoleViewport.cpp
+    src/Game.cpp
 )
 
 # Paths to headers

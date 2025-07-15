@@ -14,6 +14,6 @@ public:
 private:
     int height_;
     int width_;
-    std::vector<std::vector<chtype>> gameField;
+    std::vector<std::vector<chtype>> field_;
     void setFieldBorders();
 };
