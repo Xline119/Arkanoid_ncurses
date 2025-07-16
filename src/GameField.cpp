@@ -1,5 +1,3 @@
-#include <iostream>
-#include <iterator>
 #include "../include/GameField.hpp"
 
 using idx = std::size_t;
@@ -23,17 +21,30 @@ void GameField::setFieldBorders() {
         field_[y][L] = ACS_VLINE;
         field_[y][R] = ACS_VLINE;
     }
+    box(fieldWin_, 0, 0);
 }
 
-GameField::GameField(int height, int width) : height_(width / 4), width_(height * 1.5), 
-                                              field_(height_, std::vector<chtype>(width_, ' '))
+GameField::GameField(const ConsoleViewport& viewport, int height, int width) : height_(width / 4), width_(height * 1.5),
+    fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)), field_(height_, std::vector<chtype>(width_, ' '))
 {
     setFieldBorders();
+}
+
+GameField::~GameField() {
+    delwin(fieldWin_);
+}
+
+void GameField::render() {
+    for (int y = 0; y < height_; ++y) {
+        wmove(stdscr, 0, 0);
+        waddchnstr(stdscr, field_[y].data(), width_);
+    }
+    wrefresh(fieldWin_);
 }
 
 int GameField::height() const { return height_; }
 int GameField::width() const { return width_; }
 
-const chtype* GameField::rowData(int y) const {
-    return field_[y].data();
-}
+// const chtype* GameField::rowData(int y) const {
+//     return field_[y].data();
+// }

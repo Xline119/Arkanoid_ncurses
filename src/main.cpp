@@ -6,7 +6,7 @@ int main() {
     try {
         Game game;
         game.run();
-        //std::cin.get();
+        std::cin.get();
     } catch (const std::exception& ex) {
         std::cerr << "Error: " << ex.what() << "\n";
         return 1;

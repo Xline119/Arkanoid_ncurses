@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "../include/ConsoleViewport.hpp"
 
-
 ConsoleViewport::ConsoleViewport(int marginY, int marginX) : rows_(0), cols_(0), marginY_(marginY), marginX_(marginX) {
     initscr();
     noecho();
@@ -25,15 +24,15 @@ void ConsoleViewport::detectWindowSize() {
     cols_ = rawCols - 2 * marginX_;
 }
 
-void ConsoleViewport::render(const GameField& field) {
+void ConsoleViewport::render(/*const GameField& field*/) const {
     clear();
-    int h = field.height();
-    int w = field.width();
+    // int h = field.height();
+    // int w = field.width();
     box(stdscr, 0, 0);
-    for (int y = 0; y < h; ++y) {
-        wmove(stdscr, y + 2, w + 6);
-        waddchnstr(stdscr, field.rowData(y), w);
-    }
+    // for (int y = 0; y < h; ++y) {
+    //     wmove(stdscr, y + 2, w + 6);
+    //     waddchnstr(stdscr, field.rowData(y), w);
+    // }
     refresh();
  }
 
