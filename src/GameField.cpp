@@ -24,8 +24,11 @@ void GameField::setFieldBorders() {
     box(fieldWin_, 0, 0);
 }
 
-GameField::GameField(const ConsoleViewport& viewport, int height, int width) : height_(width / 4), width_(height * 1.5),
-    fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)), field_(height_, std::vector<chtype>(width_, ' '))
+GameField::GameField(const ConsoleViewport& viewport) 
+    : height_(viewport.height() - 2),
+      width_(viewport.width() / 2.2),
+      fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)),
+      field_(height_, std::vector<chtype>(width_, ' '))
 {
     setFieldBorders();
 }
@@ -44,7 +47,4 @@ void GameField::render() {
 
 int GameField::height() const { return height_; }
 int GameField::width() const { return width_; }
-
-// const chtype* GameField::rowData(int y) const {
-//     return field_[y].data();
-// }
+WINDOW *GameField::fieldWin() const { return fieldWin_; }

@@ -1,11 +1,10 @@
 #pragma once
-//#include "../include/GameField.hpp"
 
 class ConsoleViewport {
 public:
     ConsoleViewport(int marginY = 1, int marginX = 1);
     ~ConsoleViewport();
-    void render(/*const GameField& field*/) const;
+    void render() const;
     // Getters
     int height() const;
     int width() const;
