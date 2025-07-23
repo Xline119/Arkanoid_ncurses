@@ -30,6 +30,9 @@ GameField::GameField(const ConsoleViewport& viewport)
       fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)),
       field_(height_, std::vector<chtype>(width_, ' '))
 {
+    noecho();
+    cbreak();
+    keypad(fieldWin_, true);
     setFieldBorders();
 }
 
@@ -47,4 +50,4 @@ void GameField::render() {
 
 int GameField::height() const { return height_; }
 int GameField::width() const { return width_; }
-WINDOW *GameField::fieldWin() const { return fieldWin_; }
+WINDOW* GameField::fieldWin() const { return fieldWin_; }

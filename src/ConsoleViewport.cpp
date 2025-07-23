@@ -9,9 +9,10 @@ ConsoleViewport::ConsoleViewport(int marginY, int marginX)
        marginX_(marginX)
 {
     initscr();
-    noecho();
-    cbreak();
-    keypad(stdscr, true);
+    //curs_set(0);
+    //noecho();
+    //cbreak();
+    //keypad(stdscr, true);
     detectWindowSize();
 }
 

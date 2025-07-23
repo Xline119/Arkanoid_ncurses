@@ -16,4 +16,5 @@ private:
     SidePanel panel_;
     Platform platform_;
     bool running_;
+    void handleInput();
 };
