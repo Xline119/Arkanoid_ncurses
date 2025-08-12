@@ -30,7 +30,7 @@ void ConsoleViewport::detectWindowSize() {
     cols_ = rawCols - 2 * marginX_;
 }
 
-void ConsoleViewport::render() const {
+void ConsoleViewport::initialize() const {
     clear();
     box(stdscr, 0, 0);
     refresh();

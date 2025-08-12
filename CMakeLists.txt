@@ -18,6 +18,8 @@ add_executable(arkanoid
     src/Game.cpp
     src/SidePanel.cpp
     src/Platform.cpp
+    src/Ball.cpp
+    src/InputHandler.cpp
 )
 
 # Paths to headers

@@ -9,12 +9,11 @@ class GameField {
 public:
     GameField(const ConsoleViewport& viewport);
     ~GameField();
+    void render();
     // Getters
     int height() const;
     int width() const;
     WINDOW* fieldWin() const; 
-
-    void render();
 private:
     int height_;
     int width_;

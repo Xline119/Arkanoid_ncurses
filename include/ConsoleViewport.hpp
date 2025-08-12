@@ -4,7 +4,7 @@ class ConsoleViewport {
 public:
     ConsoleViewport(int marginY = 1, int marginX = 1);
     ~ConsoleViewport();
-    void render() const;
+    void initialize() const;
     // Getters
     int height() const;
     int width() const;

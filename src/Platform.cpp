@@ -35,3 +35,7 @@ void Platform::render(const GameField& field) const {
     else if (dir_ == LEFT)
         mvwhline(field.fieldWin(), posY_, posX_ + width_, ' ', 2);
 }
+
+int Platform::posX() const { return posX_; }
+int Platform::posY() const { return posY_; }
+int Platform::width() const { return width_; }

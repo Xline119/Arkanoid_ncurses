@@ -4,17 +4,21 @@
 #include "GameField.hpp"
 #include "SidePanel.hpp"
 #include "Platform.hpp"
+#include "InputHandler.hpp"
 
 class Game {
 public:
     Game();
-    ~Game() {};
     void run();
 private:
     ConsoleViewport viewport_;
     GameField field_;
-    SidePanel panel_;
+    SidePanel sidePanel_;
     Platform platform_;
+    InputHandler inputHandler_;
     bool running_;
-    void handleInput();
+    int lastInput_;
+    void input();
+    void update();
+    void render();
 };
