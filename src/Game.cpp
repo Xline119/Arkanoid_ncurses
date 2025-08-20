@@ -5,6 +5,7 @@ Game::Game()
       sidePanel_(viewport_),
       field_(viewport_),
       platform_(field_),
+      ball_(platform_),
       inputHandler_(field_.fieldWin()),
       running_(true)
 {}

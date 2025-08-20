@@ -6,6 +6,7 @@
 
 class Platform {
 public:
+    enum class Direction {stop, left, right};
     Platform(const GameField& field);
     void render(const GameField& field) const;
     void move(const GameField& field, int dir);
@@ -13,11 +14,11 @@ public:
     int posX() const;
     int posY() const;
     int width() const;
+    Direction movement() const { return movement_; }
 private:
-    enum direction {STOP, LEFT, RIGHT};
     int width_;
     int posY_;
     int posX_;
     std::vector<chtype> platform_;
-    direction dir_;
+    Direction movement_;
 };

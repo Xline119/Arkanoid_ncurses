@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <algorithm>
 #include <ncurses.h>
 #include "../include/ConsoleViewport.hpp"
 
@@ -13,7 +12,8 @@ public:
     // Getters
     int height() const;
     int width() const;
-    WINDOW* fieldWin() const; 
+    WINDOW* fieldWin() const;
+    chtype cell(int y, int x) const;
 private:
     int height_;
     int width_;

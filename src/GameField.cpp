@@ -1,4 +1,6 @@
 #include "../include/GameField.hpp"
+#include <stdexcept>
+#include <algorithm>
 
 using idx = std::size_t;
 
@@ -42,12 +44,22 @@ GameField::~GameField() {
 
 void GameField::render() {
     for (int y = 0; y < height_; ++y) {
-        wmove(stdscr, 0, 0);
-        waddchnstr(stdscr, field_[y].data(), width_);
+        wmove(fieldWin_, y, 0);
+        waddchnstr(fieldWin_, field_[y].data(), width_);
     }
     wrefresh(fieldWin_);
 }
 
+// Getters
 int GameField::height() const { return height_; }
+
 int GameField::width() const { return width_; }
+
 WINDOW* GameField::fieldWin() const { return fieldWin_; }
+
+chtype GameField::cell(int y, int x) const {
+    if (y < 0 || y >= height_ || x < 0 || x >= width_)
+        throw std::out_of_range("Cell coordinates out of bounds");
+    else
+        return field_[y][x];
+}
