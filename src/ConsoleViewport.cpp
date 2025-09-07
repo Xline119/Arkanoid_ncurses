@@ -9,7 +9,7 @@ ConsoleViewport::ConsoleViewport(int marginY, int marginX)
        marginX_(marginX)
 {
     initscr();
-    //curs_set(0);
+    curs_set(0);
     //noecho();
     //cbreak();
     //keypad(stdscr, true);

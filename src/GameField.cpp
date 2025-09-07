@@ -1,6 +1,55 @@
-#include "../include/GameField.hpp"
 #include <stdexcept>
 #include <algorithm>
+#include "../include/ConsoleViewport.hpp"
+#include "../include/GameField.hpp"
+
+GameField::GameField(const ConsoleViewport& viewport) 
+    : height_(viewport.height() - 2),
+      width_(viewport.width() / 2.2),
+      fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)),
+      field_(height_, std::vector<chtype>(width_, ' ')),
+      clearLine(width_ - 2, ' '),
+      hasBorders(false)
+{
+    noecho();
+    cbreak();
+    keypad(fieldWin_, true);
+    setFieldBorders();
+}
+
+GameField::~GameField() {
+    delwin(fieldWin_);
+}
+
+void GameField::render() {
+    if (!hasBorders) {
+        for (int y = 0; y < height_; ++y) {
+            wmove(fieldWin_, y, 0);
+            waddchnstr(fieldWin_, field_[y].data(), width_);
+        }
+        hasBorders = true;
+    } else {
+        for (int y = 1; y < height_ - 1; ++y) {
+            wmove(fieldWin_, y, 1);
+            waddchnstr(fieldWin_, clearLine.data(), width_ - 1);
+        }
+    }
+    wrefresh(fieldWin_);
+}
+
+// Getters
+int GameField::height() const { return height_; }
+
+int GameField::width() const { return width_; }
+
+WINDOW* GameField::fieldWin() const { return fieldWin_; }
+
+chtype GameField::cell(int y, int x) const {
+    if (y < 0 || y >= height_ || x < 0 || x >= width_)
+        throw std::out_of_range("Cell coordinates out of bounds");
+    else
+        return field_[y][x];
+}
 
 using idx = std::size_t;
 
@@ -22,44 +71,6 @@ void GameField::setFieldBorders() {
     for (idx y = 1; y < B; ++y) {
         field_[y][L] = ACS_VLINE;
         field_[y][R] = ACS_VLINE;
-    }
+    }   
     box(fieldWin_, 0, 0);
-}
-
-GameField::GameField(const ConsoleViewport& viewport) 
-    : height_(viewport.height() - 2),
-      width_(viewport.width() / 2.2),
-      fieldWin_(newwin(height_, width_, 2, viewport.width() / 2)),
-      field_(height_, std::vector<chtype>(width_, ' '))
-{
-    noecho();
-    cbreak();
-    keypad(fieldWin_, true);
-    setFieldBorders();
-}
-
-GameField::~GameField() {
-    delwin(fieldWin_);
-}
-
-void GameField::render() {
-    for (int y = 0; y < height_; ++y) {
-        wmove(fieldWin_, y, 0);
-        waddchnstr(fieldWin_, field_[y].data(), width_);
-    }
-    wrefresh(fieldWin_);
-}
-
-// Getters
-int GameField::height() const { return height_; }
-
-int GameField::width() const { return width_; }
-
-WINDOW* GameField::fieldWin() const { return fieldWin_; }
-
-chtype GameField::cell(int y, int x) const {
-    if (y < 0 || y >= height_ || x < 0 || x >= width_)
-        throw std::out_of_range("Cell coordinates out of bounds");
-    else
-        return field_[y][x];
 }

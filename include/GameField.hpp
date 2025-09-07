@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <ncurses.h>
-#include "../include/ConsoleViewport.hpp"
+
+class ConsoleViewport;
 
 class GameField {
 public:
@@ -19,5 +20,7 @@ private:
     int width_;
     WINDOW* fieldWin_;
     std::vector<std::vector<chtype>> field_;
-    void setFieldBorders();
+    const std::vector<chtype> clearLine;
+    bool hasBorders;
+    void setFieldBorders();   
 };

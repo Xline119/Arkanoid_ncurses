@@ -1,7 +1,8 @@
 #include "../include/Platform.hpp"
+#include "../include/GameField.hpp"
 
 Platform::Platform(const GameField& field)
-    : width_(field.width() / 4),
+    : width_(field.width() / 5),
       posY_(field.height() - 3),
       posX_((field.width() / 2) - width_ / 2),
       platform_(width_, ACS_HLINE),
@@ -31,10 +32,10 @@ void Platform::render(const GameField& field) const {
     mvwhline(field.fieldWin(), posY_, posX_, ACS_HLINE, width_);
 
     //Сlearing platform's traces
-    if (movement_ == Direction::right)
+/*     if (movement_ == Direction::right)
         mvwhline(field.fieldWin(), posY_, posX_ - 2, ' ', 2);
     else if (movement_ == Direction::left)
-        mvwhline(field.fieldWin(), posY_, posX_ + width_, ' ', 2);
+        mvwhline(field.fieldWin(), posY_, posX_ + width_, ' ', 2); */
 }
 
 int Platform::posX() const { return posX_; }

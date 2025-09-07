@@ -1,6 +1,11 @@
+#pragma once
+
 #include <type_traits>
-#include "GameField.hpp"
-#include "Platform.hpp"
+#include <chrono>
+#include <thread>
+
+class GameField;
+class Platform;
 
 class Ball {
 public:
@@ -12,11 +17,11 @@ public:
         stop
     };
     Ball(const Platform& platform);
-    void move(const GameField& field, const Platform& platform);
     void setDirection(const GameField& field, const Platform& platform);
+    void move();
     void render(const GameField& field) const;
 private:
-// Collision detection block
+    // Collision detection block
     enum class Collision {
         none   = 0,
         left   = 1 << 0,
@@ -24,17 +29,18 @@ private:
         top    = 1 << 2,
         bottom = 1 << 3
     };
-    // Overloaded operators for Collision
-    friend Collision operator|(Collision lhs, Collision rhs);
-    friend Collision operator&(Collision lhs, Collision rhs);
+    
+        // Overloaded operators for Collision
+    friend constexpr Collision operator|(Collision lhs, Collision rhs);
+    friend constexpr Collision operator&(Collision lhs, Collision rhs);
     friend Collision operator|=(Collision& lhs, Collision rhs);
     friend Collision operator&=(Collision& lhs, Collision rhs);
 
+        // Detection collisions
     struct DirectionInfo {
         int y, x;
         Collision vert, horiz;
     };
-
     static constexpr DirectionInfo dirs[] {
         {-1, -1, Collision::top,    Collision::left},  // leftUp
         {-1,  1, Collision::top,    Collision::right}, // rightUp
@@ -42,6 +48,7 @@ private:
         { 1,  1, Collision::bottom, Collision::right}  // rightDown
     };
     
+        // Methods for checking collisions
     void checkCollision(const GameField& field, const Platform& platform);
     template <typename ... Args>
     static bool hasCollision(Collision mask, Args ... args);
@@ -51,6 +58,8 @@ private:
     bool isMoving_;
     Direction movement_;
     Collision collisionMask_;
+    std::chrono::steady_clock::time_point lastMove_;
+    std::chrono::milliseconds moveInterval_{100}; // например, 200 мс между движениями
 };
 
 constexpr Ball::Collision operator|(Ball::Collision lhs, Ball::Collision rhs) {

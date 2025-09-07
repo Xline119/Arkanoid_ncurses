@@ -1,4 +1,5 @@
 #include "../include/SidePanel.hpp"
+#include "../include/ConsoleViewport.hpp"
 
 SidePanel::SidePanel(const ConsoleViewport& viewport) 
     : height_(viewport.height() / 3), 

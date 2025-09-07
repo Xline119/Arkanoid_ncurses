@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <ncurses.h>
-#include "GameField.hpp"
+
+class GameField;
 
 class Platform {
 public:

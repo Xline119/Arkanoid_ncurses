@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-Game::Game() 
+Game::Game()
     : viewport_(),
       sidePanel_(viewport_),
       field_(viewport_),
@@ -26,10 +26,13 @@ void Game::run() {
 
 void Game::update() {
     platform_.move(field_, lastInput_);
+    ball_.setDirection(field_, platform_);
+    ball_.move();
 }
 
 void Game::render() {
     sidePanel_.render();
     field_.render();
     platform_.render(field_);
+    ball_.render(field_);
 }

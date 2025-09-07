@@ -1,7 +1,8 @@
 #pragma once
 
 #include <ncurses.h>
-#include "../include/ConsoleViewport.hpp"
+
+class ConsoleViewport;
 
 class SidePanel {
 public:
