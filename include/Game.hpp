@@ -6,6 +6,7 @@
 #include "Platform.hpp"
 #include "InputHandler.hpp"
 #include "Ball.hpp"
+#include "GameOverScreen.hpp"
 
 class Game {
 public:
@@ -18,6 +19,7 @@ private:
     Platform platform_;
     Ball ball_;
     InputHandler inputHandler_;
+    GameOverScreen gameOverScreen_;
     bool running_;
     int lastInput_;
     void input();

@@ -20,8 +20,9 @@ public:
     void setDirection(const GameField& field, const Platform& platform);
     void move();
     void render(const GameField& field) const;
+    bool isBallLost() const;
 private:
-    // Collision detection block
+// Collision detection block
     enum class Collision {
         none   = 0,
         left   = 1 << 0,
@@ -30,13 +31,13 @@ private:
         bottom = 1 << 3
     };
     
-        // Overloaded operators for Collision
+    // Overloaded operators for Collision
     friend constexpr Collision operator|(Collision lhs, Collision rhs);
     friend constexpr Collision operator&(Collision lhs, Collision rhs);
     friend Collision operator|=(Collision& lhs, Collision rhs);
     friend Collision operator&=(Collision& lhs, Collision rhs);
 
-        // Detection collisions
+    // Detection collisions
     struct DirectionInfo {
         int y, x;
         Collision vert, horiz;
@@ -48,7 +49,7 @@ private:
         { 1,  1, Collision::bottom, Collision::right}  // rightDown
     };
     
-        // Methods for checking collisions
+    // Methods for checking collisions
     void checkCollision(const GameField& field, const Platform& platform);
     template <typename ... Args>
     static bool hasCollision(Collision mask, Args ... args);
@@ -59,7 +60,8 @@ private:
     Direction movement_;
     Collision collisionMask_;
     std::chrono::steady_clock::time_point lastMove_;
-    std::chrono::milliseconds moveInterval_{100}; // например, 200 мс между движениями
+    std::chrono::milliseconds moveInterval_{75};
+    bool isBallLost_;
 };
 
 constexpr Ball::Collision operator|(Ball::Collision lhs, Ball::Collision rhs) {

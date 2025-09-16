@@ -9,6 +9,10 @@ public:
     SidePanel(const ConsoleViewport& viewport);
     ~SidePanel();
     void render();
+
+    // Getters
+    int score() const;
+    int level() const;
 private:
     int height_;
     int width_;

@@ -20,6 +20,7 @@ add_executable(arkanoid
     src/Platform.cpp
     src/Ball.cpp
     src/InputHandler.cpp
+    src/GameOverScreen.cpp
 )
 
 # Paths to headers

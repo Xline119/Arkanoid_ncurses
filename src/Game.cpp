@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.hpp"
 
 Game::Game()
@@ -7,6 +8,7 @@ Game::Game()
       platform_(field_),
       ball_(platform_),
       inputHandler_(field_.fieldWin()),
+      gameOverScreen_(viewport_, sidePanel_),
       running_(true)
 {}
 
@@ -22,12 +24,16 @@ void Game::run() {
         update();
         render();
     }
+    gameOverScreen_.render();
+    std::cin.get();
 }
 
 void Game::update() {
     platform_.move(field_, lastInput_);
     ball_.setDirection(field_, platform_);
     ball_.move();
+    if (ball_.isBallLost())
+        running_ = false;
 }
 
 void Game::render() {

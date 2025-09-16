@@ -19,3 +19,6 @@ void SidePanel::render() {
     mvwprintw(sidePanelWin_, 2, 1, "Level: %d", level_);
     wrefresh(sidePanelWin_);
 }
+
+int SidePanel::score() const { return score_;}
+int SidePanel::level() const { return level_;}
